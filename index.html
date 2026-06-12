@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUTRIPRO - Planejamento Estratégico B2B</title>
+    <style>
+        :root {
+            --primary-color: #0f766e; /* Teal escuro profissional */
+            --secondary-color: #047857; /* Verde escuro */
+            --accent-color: #f59e0b; /* Amarelo/Laranja para alertas e call to action */
+            --bg-color: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--text-dark);
+            margin: 1.5rem 0 0.8rem 0;
+            font-size: 1.3rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #334155;
+        }
+
+        .highlight-box {
+            background-color: #f0fdf4;
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        /* Funnel Grid */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-color);
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-color);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        tr:last-child {
+            font-weight: bold;
+            background-color: #f8fafc;
+        }
+
+        /* Kanban/Trello Board Style */
+        .kanban-board {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            margin-top: 2rem;
+        }
+
+        .kanban-column {
+            background: #f1f5f9;
+            min-width: 280px;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            flex: 1;
+        }
+
+        .kanban-header {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .kanban-card {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-red { background-color: #ef4444; }
+        .tag-yellow { background-color: #f59e0b; }
+        .tag-green { background-color: #10b981; }
+        .tag-blue { background-color: #3b82f6; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            section { padding: 1.5rem; }
+            .kanban-board { flex-direction: column; }
+            .kanban-column { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NUTRIPRO</h1>
+        <p>Masterplan Estratégico: Tráfego, Funil de Vendas e Retenção B2B</p>
+    </header>
+
+    <div class="container">
+        
+        <section>
+            <h2>1. Ajustes Estratégicos (Tráfego e Indicações)</h2>
+            <p>O foco inicial é qualificar a entrada e proteger a margem de lucro da empresa, estruturando portas de entrada estratégicas para leads B2B (donos de restaurantes, padarias, açougues).</p>
+            
+            <div class="grid-cards">
+                <div class="card">
+                    <span class="card-icon">🔍</span>
+                    <h3>O Diagnóstico Estratégico</h3>
+                    <p>Em vez de cobrar na entrada, ofereça o diagnóstico como uma <strong>Auditoria Rápida e Gratuita</strong> ou Sessão Estratégica. Para afastar curiosos, utilize a estratégia do <strong>Cashback</strong>: o cliente paga R$ 100 pelo diagnóstico, mas esse valor é 100% abatido caso ele feche o serviço completo de Boas Práticas (R$ 2.000,00).</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🤝</span>
+                    <h3>Programa de Indicação</h3>
+                    <p>Proteja o seu lucro: não dê descontos. Trabalhe com <strong>recompensas fixas</strong>. Pague um valor estipulado (ex: R$ 150 a R$ 200) para parceiros (contadores, fornecedores) que trouxerem um cliente fechado. Clientes atuais podem ser premiados com serviços extras, como atualização de Fichas Técnicas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. A Estrutura do Funil de Vendas</h2>
+            <p>Jornada previsível e mapeada do lead, desenhada para conduzir o cliente da dor à solução final de alto valor agregado.</p>
+            
+            <div class="highlight-box">
+                <h3>Topo de Funil (Atração)</h3>
+                <p>Anúncios no Meta Ads e Google Ads focados nas dores agudas do empresário. Ex: <em>"Sua padaria está pronta para a Vigilância Sanitária?"</em> ou <em>"Pare de perder dinheiro com desperdício de insumos"</em>. Indicações de parceiros também alimentam esta etapa.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>Meio de Funil (Consideração)</h3>
+                <p>O lead chega via WhatsApp ou Landing Page. Aplica-se um filtro rápido (tamanho do negócio) e agenda-se o Diagnóstico. Durante a reunião, aponta-se o "sangramento" financeiro e os erros, sem entregar a solução técnica detalhada.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Fundo de Funil (Decisão)</h3>
+                <p>Apresentação da proposta do serviço de Boas Práticas. Quebra de objeções focada em matemática financeira e ROI (Retorno sobre Investimento). Fechamento do contrato.</p>
+            </div>
+
+            <div class="highlight-box" style="border-color: var(--primary-color); background-color: #f8fafc;">
+                <h3>Pós-venda (Retenção e Upsell)</h3>
+                <p>Onde o lucro real acontece. Com a confiança estabelecida e o desperdício estancado, oferece-se serviços recorrentes ou de maior valor: PGRS, Fichas Técnicas e Gerenciamento de Produção.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Quebrando a Objeção de Preço (O Discurso de Vendas)</h2>
+            <p>Quando um empresário do setor de alimentação diz que R$ 2.000,00 "está caro", ele não vê o retorno financeiro. A consultoria não é despesa, é uma ferramenta de contenção de prejuízo.</p>
+
+            <div class="grid-cards">
+                <div class="card">
+                    <h3>Transforme o Serviço em Dinheiro</h3>
+                    <p>Faça o cálculo do desperdício invisível. Se o cliente joga fora R$ 500 por mês em insumos vencidos, em 4 meses a consultoria se paga. O resto do ano é lucro limpo.</p>
+                </div>
+                <div class="card">
+                    <h3>Apresente o Custo da Inação</h3>
+                    <p>O medo real: Multas da Vigilância Sanitária, risco de imagem nas redes sociais por intoxicação alimentar e pesados processos trabalhistas por acidentes na cozinha.</p>
+                </div>
+                <div class="card">
+                    <h3>Ancoragem de Preço</h3>
+                    <p>Fracione o valor: R$ 2.000,00 diluídos em um ano representam apenas <strong>R$ 5,50 por dia</strong>. É menos que um café expresso vendido no balcão para blindar a empresa.</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">A Matemática do Desperdício (Técnica do Contraste)</h3>
+            <p>Durante a reunião, use uma calculadora para materializar a perda. Abaixo, um exemplo prático para apresentar ao dono do negócio:</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item (Insumo)</th>
+                            <th>Perda Diária Estimada</th>
+                            <th>Custo Médio</th>
+                            <th>Perda Mensal (30 dias)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Carnes / Proteínas</td>
+                            <td>500g</td>
+                            <td>R$ 35,00 / Kg</td>
+                            <td>R$ 525,00</td>
+                        </tr>
+                        <tr>
+                            <td>Pães / Massas</td>
+                            <td>2 kg</td>
+                            <td>R$ 10,00 / Kg</td>
+                            <td>R$ 600,00</td>
+                        </tr>
+                        <tr>
+                            <td>Hortifruti</td>
+                            <td>1 kg</td>
+                            <td>R$ 8,00 / Kg</td>
+                            <td>R$ 240,00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: right; padding-right: 2rem;"><strong>TOTAL PERDIDO POR MÊS:</strong></td>
+                            <td style="color: #ef4444;"><strong>R$ 1.365,00</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><em>Argumento de fechamento:</em> "Seu João, o senhor perde R$ 1.365,00 todo mês. Meu serviço custa R$ 2.000,00. Em menos de 45 dias, ele já se pagou completamente. Após isso, os R$ 1.365 viram lucro no seu caixa."</p>
+        </section>
+
+        <section>
+            <h2>4. Gestão e CRM no Trello (Pipeline de Vendas)</h2>
+            <p>O Trello deve ser o painel de inteligência operacional. Todo lead precisa passar pelas etapas visuais para que o processo de vendas deixe de ser intuição e vire uma máquina previsível.</p>
+
+            <div class="kanban-board">
+                <div class="kanban-column">
+                    <div class="kanban-header">📥 1. Novos Leads</div>
+                    <div class="kanban-card">
+                        <span class="tag tag-blue">Restaurante</span>
+                        <strong>Pizzaria Bella Napoli - Carlos</strong>
+                        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Origem: Meta Ads</p>
+                    </div>
+                </div>
+
+                <div class="kanban-column">
+                    <div class="kanban-header">📞 2. Em Qualificação</div>
+                    <div class="kanban-card">
+                        <span class="tag tag-green">Parceiro</span>
+                        <strong>Açougue Boi Gordo - Marcos</strong>
+                        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Falta confirmar se é o decisor.</p>
+                    </div>
+                </div>
+
+                <div class="kanban-column">
+                    <div class="kanban-header">📅 3. Diagnóstico</div>
+                    <div class="kanban-card">
+                        <span class="tag tag-red">Urgente</span>
+                        <strong>Padaria Pão de Ouro - João</strong>
+                        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Reunião: Hoje, 15h. Dor: Notificação Vigilância.</p>
+                    </div>
+                </div>
+
+                <div class="kanban-column">
+                    <div class="kanban-header">📊 4. Proposta Enviada</div>
+                    <div class="kanban-card">
+                        <span class="tag tag-blue">Restaurante</span>
+                        <strong>Hamburgueria Smash - Ana</strong>
+                        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Perda calculada: R$ 800/mês. Orçamento enviado.</p>
+                    </div>
+                </div>
+
+                <div class="kanban-column">
+                    <div class="kanban-header">⏳ 5. Follow-up</div>
+                    <div class="kanban-card">
+                        <span class="tag tag-yellow">Morno</span>
+                        <strong>Cafeteria Central - Luís</strong>
+                        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Falará com o sócio. Retornar amanhã.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Métricas de Acompanhamento Diário:</h3>
+            <ul style="list-style-position: inside; color: #334155;">
+                <li><strong>Custo por Lead (CPL):</strong> Investimento em tráfego dividido pelo número de contatos gerados.</li>
+                <li><strong>Taxa de Conversão:</strong> Quantidade de Diagnósticos vs. Contratos Assinados.</li>
+                <li><strong>Ciclo de Vendas:</strong> Tempo médio (em dias) do primeiro contato até o fechamento.</li>
+            </ul>
+        </section>
+
+    </div>
+
+</body>
+</html>
